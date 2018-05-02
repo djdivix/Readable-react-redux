@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import * as ReadableAPI from './utils/ReadableAPI'
 import './App.css';
 
 class App extends Component {
+	
+state = {
+	posts :[]
+}
+	
+componentDidMount() {
+	ReadableAPI.getAllCategories().then((categories) => {this.setState({categories})
+	})
+	ReadableAPI.getAllPosts().then((posts) => {this.setState({posts})
+	})
+}
+	
   render() {
     return (
       <div className="App">
@@ -12,6 +25,8 @@ class App extends Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
+		  {console.log(this.state.categories)}
+		  {console.log(this.state.posts)}
         </p>
       </div>
     );
