@@ -8,17 +8,17 @@ const headers = {
   'Accept': 'application/json',
   'Authorization': token
 }
+	
+export const getPosts = () => {
+ return fetch(`${api}/posts`, { headers })
+    .then(res => res.json())
+	.then(data => data.posts)
+}
 
-export const getAllCategories = () =>
-  fetch(`${api}/categories`, { headers })
+export const getCategories = () => {
+  return fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => data.categories)
-	
-export const getAllPosts = () =>
-  fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
-	
-	
+}
 	
 /*In my-reads we had something like 
 {"books":[...]}
