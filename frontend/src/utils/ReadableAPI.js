@@ -12,12 +12,12 @@ const headers = {
 export const getPosts = () => {
  return fetch(`${api}/posts`, { headers })
     .then(res => res.json())
-	.then(data => data.posts)
 }
 
 export const getCategories = () => {
   return fetch(`${api}/categories`, { headers })
     .then(res => res.json())
+	.then(data => data.categories)
 }
 	
 /*In my-reads we had something like 

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getAllCategories } from '../actions'
-import { getAllPosts } from '../actions'
-
+import Listposts from './Listposts'
 
 class App extends Component {
 	
 componentDidMount() {
-	
-	this.props.fetchposts()
 	this.props.fetchcategories()
 }
 	
   render() {
+	  console.log(this.props.categories)
     return (
       <div className="App">
         <header className="App-header">
@@ -25,23 +23,17 @@ componentDidMount() {
 		  <span key={c.name}>{c.name}  </span>
 		  )}
 		  </span>
-		  
-		<h2> Posts </h2>
-		<div>
-		{this.props.posts && this.props.posts.map(p =>
-		<div key = {p.id}>{p.title} </div>
-		)}
-		</div>
+		  <Listposts/>
+		
       </div>
     )
   }
 }
 
-function mapStateToProps({ categories, posts }) {
+function mapStateToProps({categories}) {
   return {
-    categories : categories,
-	posts : posts
+    categories
   }
 }
 
-export default connect(mapStateToProps, {fetchcategories : getAllCategories, fetchposts : getAllPosts })(App)
+export default connect(mapStateToProps, {fetchcategories : getAllCategories})(App);

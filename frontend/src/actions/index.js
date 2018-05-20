@@ -7,27 +7,16 @@ export const FETCH_ALL_POSTS = 'FETCH_ALL_POSTS'
 
 
 export const getAllPosts = () => (dispatch) => {
-   ReadableAPI.getPosts()
-    .then(posts => dispatch(fetchposts(posts)));
+   return ReadableAPI.getPosts()
+    .then((posts) => {
+		dispatch({type: FETCH_ALL_POSTS, posts});
+})
 }
-
-const fetchposts = (posts) => {
-  return {
-    type: FETCH_ALL_POSTS,
-    posts
-  }
-}
-
 
 
 export const getAllCategories = () => (dispatch) => {
   ReadableAPI.getCategories()
-    .then(categories => dispatch(fetchcat(categories)));
-}
-
-const fetchcat = (categories) => {
-  return {
-    type: GET_ALL_CATEGORIES,
-    categories
-  }
+    .then((categories) => {
+		dispatch({type: GET_ALL_CATEGORIES,categories});
+})
 }

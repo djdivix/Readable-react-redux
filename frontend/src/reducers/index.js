@@ -1,20 +1,8 @@
-import {
-  GET_ALL_CATEGORIES,
-  FETCH_ALL_POSTS,
-} from '../actions'
+import { combineReducers } from 'redux';
+import categories from './categories';
+import posts from './posts';
 
-
-function testfunc(state = [], action)
- {
-  switch(action.type) 
-  {
-	  case FETCH_ALL_POSTS:
-		return action.posts
-	  case GET_ALL_CATEGORIES:
-		return action.categories
-	  default:
-		return state
-  }
-}
-
-export default testfunc
+export default combineReducers({
+	categories,
+	posts
+});
