@@ -1,39 +1,24 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { getAllCategories } from '../actions'
 import Listposts from './Listposts'
+import Listcategories from './Listcategories'
+import { Link,Route } from 'react-router-dom';
 
 class App extends Component {
-	
-componentDidMount() {
-	this.props.fetchcategories()
-}
-	
   render() {
-	  console.log(this.props.categories)
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Readable</h1>
         </header>
-
-		<h2> Categories </h2>
-		  <span>
-		 {this.props.categories && this.props.categories.map(c => 
-		  <span key={c.name}>{c.name}  </span>
-		  )}
-		  </span>
-		  <Listposts/>
-		
+		  <Route exact path = '/'
+		  render = {() => (<Listcategories/>)}
+		  />
+		  <Route exact path = '/'
+		  render = {() => (<Listposts/>)}
+		  />
       </div>
     )
   }
 }
 
-function mapStateToProps({categories}) {
-  return {
-    categories
-  }
-}
-
-export default connect(mapStateToProps, {fetchcategories : getAllCategories})(App);
+export default App;

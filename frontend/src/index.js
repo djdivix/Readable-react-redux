@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css'
 
 const logger = store => next => action => {
@@ -29,6 +30,8 @@ console.log(store.getState())
 
 ReactDOM.render(
 <Provider store = {store}>
-<App /> 
+  <BrowserRouter>
+      <App/>
+  </BrowserRouter>
 </Provider>, document.getElementById('root'));
 registerServiceWorker();
