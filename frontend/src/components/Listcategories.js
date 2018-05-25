@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getAllCategories } from '../actions'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-class Listcategories extends Component {
 	
+class Listcategories extends Component {
+		
 componentDidMount() {
 	this.props.fetchcategories()
 }
   render() {
-
+	  {console.log(this.props.location)}
     return (
-	  <div>
-		<h2> Categories </h2>
-		  <span>
-		 {this.props.categories && this.props.categories.map(c => 
-		 <Link to={`${c.path}`}>
-		  <span key={c.name}>{c.name}</span>
-		  </Link>
-		  )}
-		  </span>
-      </div>
+	<div>
+		<div>
+		<h4>Categories</h4>
+		</div>
+		<div >
+		{this.props.categories.map(c => (
+		<span key={c.name}>
+			{this.props.location.pathname == `/categories/${c.path}` ? <span>{c.name}</span> : <Link to={`/categories/${c.path}`}>{c.name}</Link>}
+		</span>
+    ))}
+    </div>
+  </div>
     )
   }
 }
@@ -31,4 +34,4 @@ function mapStateToProps({categories}) {
   }
 }
 
-export default connect(mapStateToProps, {fetchcategories : getAllCategories})(Listcategories);
+export default withRouter(connect(mapStateToProps, {fetchcategories : getAllCategories})(Listcategories));
