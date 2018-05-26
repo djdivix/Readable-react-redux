@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getAllPosts } from '../actions'
 import { Switch, withRouter, Route } from 'react-router-dom';
 
-class Listcategoryposts extends Component {
+class Showposts extends Component {
 	
 componentDidMount() {
 	this.props.fetchposts()
@@ -14,12 +14,30 @@ componentDidMount() {
     return (
 			<div>
 	<Switch>
+	
+		<Route exact path='/'
+            render={({ match }) => (
+			<div>
+			<h1>All Posts</h1>
+              {this.props.posts && this.props.posts.map(p =>
+			  <div key = {p.id}>
+			   <div>{p.title} </div>
+			   <div>{p.body} </div>
+			   <div>{p.author}</div>
+			   <div>{p.category} </div>
+			   </div>
+			  )}
+			</div>
+			)}
+         />
+	
 		<Route exact path='/categories/:name'
             render={({ match }) => (
 			<div>
+			<h1> Posts for {match.params.name} category </h1>
               {this.props.posts && this.props.posts.filter(p => p.category == match.params.name).map(p =>
-			  <div>
-			   <div key = {p.id}>{p.title} </div>
+			  <div key = {p.id}>
+			   <div >{p.title} </div>
 			   <div >{p.body} </div>
 			   <div>{p.author}</div>
 			   <div >{p.category} </div>
@@ -40,4 +58,4 @@ function mapStateToProps({posts}) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchposts : getAllPosts })(Listcategoryposts));
+export default withRouter(connect(mapStateToProps, { fetchposts : getAllPosts })(Showposts));
