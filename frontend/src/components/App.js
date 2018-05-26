@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Listposts from './Listposts'
 import Listcategories from './Listcategories'
+import Listcategoryposts from './Listcategoryposts'
 import { withRouter } from 'react-router-dom';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
         </header>
 		<Listcategories/>
 		<Listposts/>
+		<Listcategoryposts/>
       </div>
     )
   }
