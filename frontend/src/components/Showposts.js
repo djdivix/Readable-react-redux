@@ -21,7 +21,9 @@ componentDidMount() {
 			<div>
 			<h1>All Posts</h1>
               {this.props.posts && this.props.posts.map(p =>
+			  <div key = {p.id}>
 				<SinglePost post = {p}/>
+		      </div>
 			  )}
 			</div>
 			)}

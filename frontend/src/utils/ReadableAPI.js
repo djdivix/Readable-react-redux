@@ -19,7 +19,33 @@ export const getCategories = () => {
     .then(res => res.json())
 	.then(data => data.categories)
 }
-	
+
+export const upPost = (upVote) => (id) => {
+  return fetch(`${api}/posts/${id}`,
+  {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+	body: JSON.stringify({ upVote }) 
+  })
+  .then(res => res.json());
+}
+
+export const downPost = (downVote) => (id) => {
+  return fetch(`${api}/posts/${id}`,
+  {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+	body: JSON.stringify({ downVote }) 
+  })
+  .then(res => res.json());
+}
+
 /*In my-reads we had something like 
 {"books":[...]}
 So data.books was returning the array.
