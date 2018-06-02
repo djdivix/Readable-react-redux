@@ -1,11 +1,12 @@
 const api = 'http://localhost:3001'
+const OPTION_UPVOTE = 'upVote';
+const OPTION_DOWNVOTE = 'downVote';
 
 let token = localStorage.token
 if (!token)
   token = localStorage.token = Math.random().toString(36).substr(-8)
 
 const headers = {
-  'Accept': 'application/json',
   'Authorization': token
 }
 	
@@ -20,7 +21,7 @@ export const getCategories = () => {
 	.then(data => data.categories)
 }
 
-export const upPost = (upVote) => (id) => {
+const votePost = (option) => (id) => {
   return fetch(`${api}/posts/${id}`,
   {
     method: 'POST',
@@ -28,24 +29,13 @@ export const upPost = (upVote) => (id) => {
       ...headers,
       'Content-Type': 'application/json'
     },
-	body: JSON.stringify({ upVote }) 
+	body: JSON.stringify({ option }) 
   })
   .then(res => res.json());
 }
 
-export const downPost = (downVote) => (id) => {
-  return fetch(`${api}/posts/${id}`,
-  {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-	body: JSON.stringify({ downVote }) 
-  })
-  .then(res => res.json());
-}
-
+export const upPost = votePost(OPTION_UPVOTE);
+export const downPost = votePost(OPTION_DOWNVOTE);
 /*In my-reads we had something like 
 {"books":[...]}
 So data.books was returning the array.

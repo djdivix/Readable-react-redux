@@ -33,5 +33,4 @@ class SinglePost extends Component {
 	  }
 }
 
-
 export default connect(undefined,{ onUpvote: upvotePost, onDownvote: downvotePost })(SinglePost);
