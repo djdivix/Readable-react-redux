@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getAllPosts } from '../actions'
-import { Switch, withRouter, Route, Link } from 'react-router-dom';
+import { Switch, withRouter, Route } from 'react-router-dom';
 import SinglePost from './SinglePost'
 import NewPost from './NewPost'
 
@@ -40,7 +40,7 @@ componentDidMount() {
             path='/posts/edit/:id'
             render={({ match }) => (
 			<div>
-			{this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
+			{this.props.posts && this.props.posts.filter(p => p.id === match.params.id).map(p =>
 			   <NewPost post = {p}/>	
 			  )}
 			</div>
@@ -51,7 +51,7 @@ componentDidMount() {
             path='/posts/delete/:id'
             render={({ match }) => (
 			<div>
-			{this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
+			{this.props.posts && this.props.posts.filter(p => p.id === match.params.id).map(p =>
 			   <NewPost post = {p}/>	
 			  )}
 			</div>
@@ -62,7 +62,7 @@ componentDidMount() {
             render={({ match }) => (
 			<div>
 			<h1> Posts for {match.params.name} category </h1>
-              {this.props.posts && this.props.posts.filter(p => p.category == match.params.name).map(p =>
+              {this.props.posts && this.props.posts.filter(p => p.category === match.params.name).map(p =>
 			  <SinglePost post = {p}/>
 			  )}
 			</div>
@@ -70,11 +70,11 @@ componentDidMount() {
           />
 		  
 		  <Route exact
-            path='/posts/:id' 
+            path='/viewpost/:id' 
             render={({ match }) => (
 			<div>
-               {this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
-			   <SinglePost post = {p}/>	
+               {this.props.posts && this.props.posts.filter(p => p.id === match.params.id).map(p =>
+			   <SinglePost post = {p} key = {p.id}/>	
 			   )}
 			</div>
             )}

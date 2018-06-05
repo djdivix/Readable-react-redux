@@ -10,7 +10,7 @@ function posts(state = [], action)
   switch(action.type) 
   {
 	  case FETCH_ALL_POSTS:
-		return action.posts
+		return action.posts;
 	  case CREATE_POST:
       return [
         ...state,
@@ -22,6 +22,8 @@ function posts(state = [], action)
 		return state.map(p => singlepost(p, action));
       case DOWNVOTE_POST:
         return state.map(p => singlepost(p, action));
+	  case DELETE_POST:
+		return [ ...state.filter(post => post.id !== action.id) ];
 	  default:
 		return state
   }
@@ -32,7 +34,7 @@ function singlepost(state = {}, action)
   switch(action.type)
   {
 	  case UPVOTE_POST:
-      if (state.id != action.id) {
+      if (state.id !== action.id) {
         return state;
       }
       return {
@@ -51,8 +53,6 @@ function singlepost(state = {}, action)
       if (state.id !== action.post.id) {
         return state;
       }  
-	case DELETE_POST:
-      return state.map(post => post.id !== action.id)
 	
     default:
       return state;

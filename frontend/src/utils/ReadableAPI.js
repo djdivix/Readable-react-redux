@@ -78,6 +78,59 @@ export const dropPost = (id) => {
     });
 }
 
+export const getComments = (id) => {
+  return fetch(`${api}/posts/${id}/comments`, { headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    } })
+    .then(res => res.json());
+}
+
+const voteComment = (option) => (commentId) => {
+  return fetch(`${api}/comments/${commentId}`,
+  {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+	body: JSON.stringify({ option }) 
+  })
+  .then(res => res.json());
+}
+
+export const dropComment = (id) => {
+  return fetch(`${api}/comments/${id}`,
+    { 
+      method: 'DELETE',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+    });
+}
+
+export const addnewcomment = (parentId, data) => {
+  return fetch(`${api}/comments`,
+    { 
+      method: 'POST',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        ...data,
+		parentId,
+        id: v4(),
+        timestamp: Date.now()
+      })
+    })
+    .then(res => res.json());
+}
+
+
+export const upComment = voteComment(OPTION_UPVOTE);
+export const downComment = voteComment(OPTION_DOWNVOTE);
 export const upPost = votePost(OPTION_UPVOTE);
 export const downPost = votePost(OPTION_DOWNVOTE);
 /*In my-reads we had something like 
