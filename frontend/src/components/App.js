@@ -12,6 +12,7 @@ class App extends Component {
         </header>
 		<Link to='/'>Home</Link>
 		<Listcategories/>
+		<Link to='/posts/new'>New Post</Link>
 		<Showposts/>
       </div>
     )

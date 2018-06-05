@@ -1,6 +1,9 @@
 import { FETCH_ALL_POSTS,
 	UPVOTE_POST,
-	DOWNVOTE_POST } from '../actions'
+	DOWNVOTE_POST,
+	CREATE_POST,
+	EDIT_POST,
+	DELETE_POST} from '../actions'
 
 function posts(state = [], action)
  {
@@ -8,6 +11,13 @@ function posts(state = [], action)
   {
 	  case FETCH_ALL_POSTS:
 		return action.posts
+	  case CREATE_POST:
+      return [
+        ...state,
+        action.post
+      ];
+	  case EDIT_POST:
+      return state.map(p => singlepost(p,action));
 	  case UPVOTE_POST:
 		return state.map(p => singlepost(p, action));
       case DOWNVOTE_POST:
@@ -37,10 +47,17 @@ function singlepost(state = {}, action)
         ...state,
         voteScore: state.voteScore - 1
       }
+	case EDIT_POST:
+      if (state.id !== action.post.id) {
+        return state;
+      }  
+	case DELETE_POST:
+      return state.map(post => post.id !== action.id)
+	
     default:
       return state;
   }
  }
  
 
-export default posts
+export default posts;

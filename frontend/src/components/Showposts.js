@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getAllPosts } from '../actions'
 import { Switch, withRouter, Route, Link } from 'react-router-dom';
 import SinglePost from './SinglePost'
+import NewPost from './NewPost'
 
 class Showposts extends Component {
 	
@@ -28,7 +29,35 @@ componentDidMount() {
 			</div>
 			)}
          />
-	
+		 
+		<Route exact path='/posts/new'
+			render={({ match }) => (
+            <NewPost/>
+			)}
+        />
+		  
+		<Route
+            path='/posts/edit/:id'
+            render={({ match }) => (
+			<div>
+			{this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
+			   <NewPost post = {p}/>	
+			  )}
+			</div>
+            )}
+        />
+		
+		<Route
+            path='/posts/delete/:id'
+            render={({ match }) => (
+			<div>
+			{this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
+			   <NewPost post = {p}/>	
+			  )}
+			</div>
+            )}
+        />
+		  
 		<Route exact path='/categories/:name'
             render={({ match }) => (
 			<div>
@@ -45,11 +74,7 @@ componentDidMount() {
             render={({ match }) => (
 			<div>
                {this.props.posts && this.props.posts.filter(p => p.id == match.params.id).map(p =>
-			   <div key = {p.id}>
-			   <h2>{p.title}</h2>
-				<p>Author <b>{p.author}</b> Time {p.timestamp}</p>
-				<p>{p.body}</p>
-				</div>
+			   <SinglePost post = {p}/>	
 			   )}
 			</div>
             )}

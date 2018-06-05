@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 const api = 'http://localhost:3001'
 const OPTION_UPVOTE = 'upVote';
 const OPTION_DOWNVOTE = 'downVote';
@@ -32,6 +33,49 @@ const votePost = (option) => (id) => {
 	body: JSON.stringify({ option }) 
   })
   .then(res => res.json());
+}
+
+export const createPost = (data) => {
+  return fetch(`${api}/posts`,
+    { 
+      method: 'POST',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        ...data,
+        id: v4(),
+        timestamp: Date.now()
+      })
+    })
+    .then(res => res.json());
+}
+
+export const editPost = (id, data) => {
+  return fetch(`${api}/posts/${id}`,
+    { 
+      method: 'PUT',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        ...data
+      })
+    })
+    .then(res => res.json());
+}
+
+export const dropPost = (id) => {
+  return fetch(`${api}/posts/${id}`,
+    { 
+      method: 'DELETE',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+    });
 }
 
 export const upPost = votePost(OPTION_UPVOTE);
