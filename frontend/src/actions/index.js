@@ -111,16 +111,16 @@ export const downvoteComment = (id) => (dispatch) => {
 })
 }
 
-export const ondeleteComment = (id) => (dispatch) => {
+export const ondeleteComment = (id,parentId) => (dispatch) => {
   ReadableAPI.dropComment(id)
-    .then(() => {dispatch({type: DELETE_COMMENT,id})
+    .then(() => {dispatch({type: DELETE_COMMENT,id,parentId})
 	})
 }
 
 export const addComment = (parentId,comment) => (dispatch) => {
   ReadableAPI.addnewcomment(parentId,comment)
-    .then(comment => {
-		dispatch({type: CREATE_COMMENT,comment})
+    .then((comment) => {
+		dispatch({type: CREATE_COMMENT,parentId,comment})
 	});
 }
 

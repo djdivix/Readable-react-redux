@@ -7,7 +7,9 @@ import { FETCH_ALL_POSTS,
 	SORT_TIME_LH,
 	SORT_TIME_HL,
 	SORT_VOTES_LH,
-	SORT_VOTES_HL} from '../actions'
+	SORT_VOTES_HL,
+	DELETE_COMMENT,
+	CREATE_COMMENT} from '../actions'
 
 function posts(state = [], action)
  {
@@ -44,7 +46,10 @@ function posts(state = [], action)
 		return [...state].sort((a, b) => {
 				return b.timestamp - a.timestamp;
             });
-	  
+	  case CREATE_COMMENT:
+		return state.map(p => singlepost(p, action));
+	  case DELETE_COMMENT:
+		return state.map(p => singlepost(p, action));
 	  default:
 		return state
   }
@@ -55,10 +60,6 @@ function singlepost(state = {}, action)
   switch(action.type)
   {
 	case UPVOTE_POST:
-	console.log("action")
-	console.log(action)
-	console.log("state")
-	console.log(state)
       if (state.id !== action.id.id) {
         return state;
       }
@@ -80,6 +81,22 @@ function singlepost(state = {}, action)
       }  
 	  return {
         ...action.post
+      }
+	 case CREATE_COMMENT:
+	 if (state.id !== action.parentId) {
+        return state;
+      }  
+	  return {
+        ...state,
+        commentCount: state.commentCount + 1
+      }
+	 case DELETE_COMMENT:
+	 if (state.id !== action.parentId) {
+        return state;
+      }  
+	  return {
+        ...state,
+        commentCount: state.commentCount - 1
       }
     default:
       return state;

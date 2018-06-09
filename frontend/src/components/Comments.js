@@ -24,13 +24,14 @@ class Comments extends Component {
 		e.preventDefault()
 		const values = serializeForm(e.target, {hash:true})
 		console.log(values)
+		console.log(this.props.postid)
 		this.props.makeComment(this.props.postid,values);
 	}
 	
 	render() {		
 		console.log(this.props.comments)
 		return (
-		
+
 		<div>
 		<h2>Comments</h2>
 		<div>

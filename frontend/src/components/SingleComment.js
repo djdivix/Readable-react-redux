@@ -65,7 +65,7 @@ class SingleComment extends Component {
 							</div>
 							}	
 						</Modal>
-						<span><Link to={this.props.location.pathname} onClick={() => deleteComment(comment.id)}> Delete </Link></span>
+						<span><Link to={this.props.location.pathname} onClick={() => deleteComment(comment.id,comment.parentId)}> Delete </Link></span>
 					</div>
 			    </div>
 				<hr/>
