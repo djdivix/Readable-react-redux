@@ -4,7 +4,11 @@ import {
   DOWNVOTE_COMMENT,
   DELETE_COMMENT,
   CREATE_COMMENT,
-  EDIT_COMMENT
+  EDIT_COMMENT,
+  SORT_COM_VOTES_LH,
+  SORT_COM_VOTES_HL,
+  SORT_COM_TIME_LH,
+  SORT_COM_TIME_HL
 } from '../actions';
 
 const comments = (state = [], action) => {
@@ -23,7 +27,24 @@ const comments = (state = [], action) => {
         action.comment
       ];
 	case EDIT_COMMENT:
-      return state.map(c => comment(c, action));
+    return state.map(c => comment(c, action));
+ 	case SORT_COM_VOTES_LH:
+	return [...state].sort((a, b) => {
+              return a.voteScore - b.voteScore;
+          });
+	case SORT_COM_VOTES_HL:
+	return [...state].sort((a, b) => {
+              return b.voteScore - a.voteScore;
+          });
+	case SORT_COM_TIME_LH:
+	return [...state].sort((a, b) => {
+			return a.timestamp - b.timestamp;
+		});
+	case SORT_COM_TIME_HL:
+	return [...state].sort((a, b) => {
+			return b.timestamp - a.timestamp;
+          });
+			
     default:
       return state;
   }

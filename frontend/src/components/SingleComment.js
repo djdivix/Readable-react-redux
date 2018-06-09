@@ -34,6 +34,7 @@ class SingleComment extends Component {
 
 				<div>{comment.body} </div>
 				<div>{comment.author}</div>
+				<div className = "Postauthor">Added on {new Date(comment.timestamp).toLocaleString()}</div>
 				<div>
 					<div>
 						<FaThumbsOUp onClick={() => onUpvote(comment.id)} />

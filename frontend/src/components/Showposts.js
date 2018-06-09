@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getAllPosts } from '../actions'
+import { getAllPosts, sortvscoreLH, sortvscoreHL, sorttimestampLH, sorttimestampHL } from '../actions'
 import { Switch, withRouter, Route } from 'react-router-dom';
 import SinglePost from './SinglePost'
 import NewPost from './NewPost'
@@ -21,6 +21,15 @@ componentDidMount() {
             render={({ match }) => (
 			<div>
 			<h1 className = "AllPosthead">Showing All Posts</h1>
+			<div>
+				<span>Sort Posts by : </span>
+				<button onClick={() => this.props.vscoreLH()}>Number of Votes : Low to High</button>
+				<button onClick={() => this.props.vscoreHL()}>Number of Votes : High to Low</button>
+				<button onClick={() => this.props.timestampLH()}>Date Added : Low to High</button>
+				<button onClick={() => this.props.timestampHL()}>Date Added : High to Low</button>
+
+			</div>
+			
               {this.props.posts && this.props.posts.map(p =>
 			  <div key = {p.id}>
 				<SinglePost post = {p}/>
@@ -63,7 +72,7 @@ componentDidMount() {
 			<div>
 			<h1> Posts for {match.params.name} category </h1>
               {this.props.posts && this.props.posts.filter(p => p.category === match.params.name).map(p =>
-			  <SinglePost post = {p}/>
+			  <SinglePost post = {p} key = {p.id}/>
 			  )}
 			</div>
 			)}
@@ -92,4 +101,4 @@ function mapStateToProps({posts}) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchposts : getAllPosts })(Showposts));
+export default withRouter(connect(mapStateToProps, { fetchposts : getAllPosts, vscoreLH :  sortvscoreLH, vscoreHL : sortvscoreHL, timestampLH : sorttimestampLH, timestampHL :  sorttimestampHL })(Showposts));

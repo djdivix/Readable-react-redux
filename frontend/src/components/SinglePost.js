@@ -18,6 +18,7 @@ class SinglePost extends Component {
 				</Link>
 				<div className = "Postbody">{post.body} </div>
 				<div className = "Postauthor">Written By {post.author}</div>
+				<div className = "Postauthor">Added on {new Date(post.timestamp).toLocaleString()}</div>
 				<div className = "Postcategory">Category : {post.category} </div>
 				<div>
 					<div>

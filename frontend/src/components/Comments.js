@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom';
-import { getComments, addComment } from '../actions'
+import { getComments, addComment, sortCOMvscoreLH, sortCOMvscoreHL, sortCOMtimestampLH, sortCOMtimestampHL } from '../actions'
 import SingleComment from './SingleComment'
 import Modal from 'react-modal'
 import serializeForm from 'form-serialize'
@@ -33,6 +33,14 @@ class Comments extends Component {
 		
 		<div>
 		<h2>Comments</h2>
+		<div>
+				<span>Sort Comments by : </span>
+				<button onClick={() => this.props.vscoreLH()}>Number of Votes : Low to High</button>
+				<button onClick={() => this.props.vscoreHL()}>Number of Votes : High to Low</button>
+				<button onClick={() => this.props.timestampLH()}>Date Added : Low to High</button>
+				<button onClick={() => this.props.timestampHL()}>Date Added : High to Low</button>
+
+		</div>
 			{this.props.comments && this.props.comments.map(c =>
 			  <div key = {c.id}>
 				<SingleComment comment = {c}/>
@@ -74,4 +82,4 @@ function mapStateToProps({comments}) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchcomments : getComments, makeComment : addComment })(Comments));
+export default withRouter(connect(mapStateToProps, { fetchcomments : getComments, makeComment : addComment, vscoreLH : sortCOMvscoreLH, vscoreHL : sortCOMvscoreHL, timestampLH : sortCOMtimestampLH, timestampHL : sortCOMtimestampHL })(Comments));

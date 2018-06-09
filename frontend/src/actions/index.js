@@ -26,6 +26,22 @@ export const CREATE_COMMENT = 'CREATE_COMMENT'
 
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 
+export const SORT_VOTES_LH = 'SORT_VOTES_LH'
+
+export const SORT_VOTES_HL = 'SORT_VOTES_HL'
+
+export const SORT_TIME_LH = 'SORT_TIME_LH'
+
+export const SORT_TIME_HL = 'SORT_TIME_HL'
+
+export const SORT_COM_VOTES_LH = 'SORT_COM_VOTES_LH'
+
+export const SORT_COM_VOTES_HL = 'SORT_COM_VOTES_HL'
+
+export const SORT_COM_TIME_LH = 'SORT_COM_TIME_LH'
+
+export const SORT_COM_TIME_HL = 'SORT_COM_TIME_HL'
+
 export const getAllPosts = () => (dispatch) => {
    return ReadableAPI.getPosts()
     .then((posts) => {
@@ -113,3 +129,29 @@ export const oneditComment = (id, comment) => (dispatch) => {
     .then(comment => {dispatch({type: EDIT_COMMENT,comment})
 	})
 }
+
+export const sortvscoreLH = () => ({
+    type: SORT_VOTES_LH
+});
+export const sortvscoreHL = () => ({
+    type: SORT_VOTES_HL
+});
+export const sorttimestampLH = () => ({
+    type: SORT_TIME_LH
+});
+export const sorttimestampHL = () => ({
+    type: SORT_TIME_HL
+});
+
+export const sortCOMvscoreLH = () => ({
+    type: SORT_COM_VOTES_LH
+});
+export const sortCOMvscoreHL = () => ({
+    type: SORT_COM_VOTES_HL
+});
+export const sortCOMtimestampLH = () => ({
+    type: SORT_COM_TIME_LH
+});
+export const sortCOMtimestampHL = () => ({
+    type: SORT_COM_TIME_HL
+});

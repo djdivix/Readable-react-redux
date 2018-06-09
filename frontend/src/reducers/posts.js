@@ -3,7 +3,11 @@ import { FETCH_ALL_POSTS,
 	DOWNVOTE_POST,
 	CREATE_POST,
 	EDIT_POST,
-	DELETE_POST} from '../actions'
+	DELETE_POST,
+	SORT_TIME_LH,
+	SORT_TIME_HL,
+	SORT_VOTES_LH,
+	SORT_VOTES_HL} from '../actions'
 
 function posts(state = [], action)
  {
@@ -24,6 +28,23 @@ function posts(state = [], action)
         return state.map(p => singlepost(p, action));
 	  case DELETE_POST:
 		return [ ...state.filter(post => post.id !== action.id) ];
+	  case SORT_VOTES_LH:
+		return [...state].sort((a, b) => {
+                return a.voteScore - b.voteScore;
+            });
+	  case SORT_VOTES_HL:
+		return [...state].sort((a, b) => {
+                return b.voteScore - a.voteScore;
+            });
+	  case SORT_TIME_LH:
+		return [...state].sort((a, b) => {
+				return a.timestamp - b.timestamp;
+			});
+	  case SORT_TIME_HL:
+		return [...state].sort((a, b) => {
+				return b.timestamp - a.timestamp;
+            });
+	  
 	  default:
 		return state
   }
