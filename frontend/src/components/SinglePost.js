@@ -33,7 +33,7 @@ class SinglePost extends Component {
 						{post.commentCount} Comments 
 					</div>
 					<div>
-						<span><Link to={`posts/edit/${post.id}`} > Edit </Link></span>
+						<span><Link to={`/posts/edit/${post.id}`} > Edit </Link></span>
 						<span><Link to='/' onClick={() => deletePost(post.id)}> Delete </Link></span>
 					</div>
 					{this.props.match.url.indexOf('viewpost') !== -1 ?
