@@ -33,8 +33,12 @@ function singlepost(state = {}, action)
  {
   switch(action.type)
   {
-	  case UPVOTE_POST:
-      if (state.id !== action.id) {
+	case UPVOTE_POST:
+	console.log("action")
+	console.log(action)
+	console.log("state")
+	console.log(state)
+      if (state.id !== action.id.id) {
         return state;
       }
       return {
@@ -42,7 +46,7 @@ function singlepost(state = {}, action)
         voteScore: state.voteScore + 1
       }
     case DOWNVOTE_POST:
-      if (state.id !== action.id) {
+      if (state.id !== action.id.id) {
         return state;
       }
       return {
@@ -53,7 +57,9 @@ function singlepost(state = {}, action)
       if (state.id !== action.post.id) {
         return state;
       }  
-	
+	  return {
+        ...action.post
+      }
     default:
       return state;
   }

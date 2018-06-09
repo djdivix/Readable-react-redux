@@ -107,3 +107,9 @@ export const addComment = (parentId,comment) => (dispatch) => {
 		dispatch({type: CREATE_COMMENT,comment})
 	});
 }
+
+export const oneditComment = (id, comment) => (dispatch) => {
+  ReadableAPI.editComment(id, comment)
+    .then(comment => {dispatch({type: EDIT_COMMENT,comment})
+	})
+}

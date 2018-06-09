@@ -22,6 +22,8 @@ const comments = (state = [], action) => {
         ...state,
         action.comment
       ];
+	case EDIT_COMMENT:
+      return state.map(c => comment(c, action));
     default:
       return state;
   }
@@ -37,7 +39,7 @@ const comment = (state = {}, action) => {
         ...action.comment
       }
     case UPVOTE_COMMENT:
-      if (state.id !== action.id) {
+      if (state.id !== action.id.id) {
         return state;
       }
       return {
@@ -45,7 +47,7 @@ const comment = (state = {}, action) => {
         voteScore: state.voteScore + 1
       }
     case DOWNVOTE_COMMENT:
-      if (state.id !== action.id) {
+      if (state.id !== action.id.id) {
         return state;
       }
       return {

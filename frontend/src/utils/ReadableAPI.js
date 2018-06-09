@@ -127,7 +127,21 @@ export const addnewcomment = (parentId, data) => {
     })
     .then(res => res.json());
 }
-
+export const editComment = (id, data) => {
+  return fetch(`${api}/comments/${id}`,
+    { 
+      method: 'PUT',
+      headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        ...data,
+		timestamp: Date.now()
+      })
+    })
+    .then(res => res.json());
+}
 
 export const upComment = voteComment(OPTION_UPVOTE);
 export const downComment = voteComment(OPTION_DOWNVOTE);

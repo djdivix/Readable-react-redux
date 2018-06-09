@@ -41,7 +41,7 @@ componentDidMount() {
             render={({ match }) => (
 			<div>
 			{this.props.posts && this.props.posts.filter(p => p.id === match.params.id).map(p =>
-			   <NewPost post = {p}/>	
+			<NewPost post = {p} key = {p.id}/>	
 			  )}
 			</div>
             )}
@@ -52,7 +52,7 @@ componentDidMount() {
             render={({ match }) => (
 			<div>
 			{this.props.posts && this.props.posts.filter(p => p.id === match.params.id).map(p =>
-			   <NewPost post = {p}/>	
+			   <NewPost post = {p} key = {p.id}/>	
 			  )}
 			</div>
             )}
