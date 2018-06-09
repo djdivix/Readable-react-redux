@@ -18,7 +18,7 @@ componentDidMount() {
 		</div>
 		<div >
 		{this.props.categories.map(c => (
-		<span key={c.name}>
+		<span key={c.name} className="Categorylist">
 			{this.props.location.pathname === `/categories/${c.path}` ? <span>{c.name}</span> : <Link to={`/categories/${c.path}`}>{c.name}</Link>}
 		</span>
     ))}

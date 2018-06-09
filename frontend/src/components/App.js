@@ -10,9 +10,13 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Readable</h1>
         </header>
+		<div className="Homelink" >
 		<Link to='/'>Home</Link>
+		</div>
 		<Listcategories/>
+		<div className = "NewPostlink">
 		<Link to='/posts/new'>New Post</Link>
+		</div>
 		<Showposts/>
       </div>
     )

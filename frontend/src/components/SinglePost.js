@@ -14,11 +14,11 @@ class SinglePost extends Component {
     return (
 			  <div>
 				<Link to={`/viewpost/${post.id}`}>
-					<div>{post.title} </div>
+					<div className = "Posttitle">{post.title} </div>
 				</Link>
-				<div>{post.body} </div>
-				<div>{post.author}</div>
-				<div>{post.category} </div>
+				<div className = "Postbody">{post.body} </div>
+				<div className = "Postauthor">Written By {post.author}</div>
+				<div className = "Postcategory">Category : {post.category} </div>
 				<div>
 					<div>
 						<FaThumbsOUp onClick={() => onUpvote(post.id)} />
